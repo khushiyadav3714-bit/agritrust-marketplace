@@ -30,3 +30,7 @@ dist-ssr
 __pycache__/
 *.pyc
 
+
+# Ignore uploaded crop images
+uploads/*
+!uploads/.gitkeep
