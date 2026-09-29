@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import FarmerLeaderboard from "../components/FarmerLeaderboard";
+import Footer from "../components/Footer";
+import HeroBanner from "../components/HeroBanner";
+import ShowcaseCards from "../components/ShowcaseCards";
 
 function BuyerDashboard() {
+  const { language, toggleLanguage, t } = useLanguage();
   const [buyer, setBuyer] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -487,6 +493,7 @@ function BuyerDashboard() {
               alignItems: "center",
               gap: "20px",
               marginBottom: "28px",
+              flexWrap: "wrap",
             }}
           >
             <div>
@@ -495,9 +502,10 @@ function BuyerDashboard() {
                   margin: "0 0 7px",
                   color: "#6c7b71",
                   fontSize: "14px",
+                  fontWeight: "bold"
                 }}
               >
-                Buyer Dashboard
+                {t("buyer_dashboard")}
               </p>
 
               <h1
@@ -507,146 +515,59 @@ function BuyerDashboard() {
                   color: "#173b25",
                 }}
               >
-                Welcome back,{" "}
-                {buyer.name ||
-                  "Buyer"} 👋
+                {t("welcome")}, {buyer.name || "Buyer"} 👋
               </h1>
 
               <p
                 style={{
                   color: "#718078",
-                  margin:
-                    "8px 0 0",
+                  margin: "8px 0 0",
                 }}
               >
-                Discover crops, compare
-                prices and bid with confidence.
+                {t("buyer_dashboard_desc")}
               </p>
             </div>
 
-            <button
-              onClick={logout}
-              style={{
-                border: "1px solid #dce5dc",
-                background: "#ffffff",
-                borderRadius: "12px",
-                padding:
-                  "11px 17px",
-                cursor: "pointer",
-                color: "#496050",
-                fontWeight: "bold",
-              }}
-            >
-              Logout
-            </button>
-          </div>
-
-          {/* =================================================
-              WELCOME BANNER
-          ================================================= */}
-
-          <div
-            style={{
-              background:
-                "linear-gradient(135deg, #245c32, #3f874c)",
-              borderRadius: "22px",
-              padding:
-                "28px 30px",
-              color: "#ffffff",
-              marginBottom: "25px",
-              display: "flex",
-              justifyContent:
-                "space-between",
-              alignItems: "center",
-              gap: "20px",
-              overflow: "hidden",
-              position: "relative",
-              boxShadow:
-                "0 12px 30px rgba(35,91,48,0.18)",
-            }}
-          >
-            <div
-              style={{
-                position: "relative",
-                zIndex: 2,
-              }}
-            >
-              <div
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <button
+                onClick={toggleLanguage}
+                type="button"
                 style={{
-                  display: "inline-block",
-                  padding:
-                    "6px 10px",
-                  borderRadius: "20px",
-                  background:
-                    "rgba(255,255,255,0.14)",
-                  fontSize: "12px",
-                  marginBottom: "12px",
+                  padding: "10px 16px",
+                  border: "1px solid #2e7d32",
+                  borderRadius: "12px",
+                  background: "#e8f5e9",
+                  color: "#2e7d32",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px"
                 }}
               >
-                🌱 Smart Marketplace
-              </div>
-
-              <h2
-                style={{
-                  margin:
-                    "0 0 8px",
-                  fontSize: "25px",
-                }}
-              >
-                Buy smarter.
-                <br />
-                Bid with confidence.
-              </h2>
-
-              <p
-                style={{
-                  margin: 0,
-                  maxWidth: "580px",
-                  lineHeight: "1.6",
-                  opacity: 0.9,
-                  fontSize: "14px",
-                }}
-              >
-                Compare farmer crops,
-                market prices and
-                AI-powered quality
-                information before you
-                place your bid.
-              </p>
+                🌐 {language === "en" ? "ಕನ್ನಡ" : "English"}
+              </button>
 
               <button
-                onClick={() =>
-                  goTo("/available-crops")
-                }
+                onClick={logout}
                 style={{
-                  marginTop: "18px",
-                  border: "none",
-                  borderRadius: "11px",
-                  padding:
-                    "12px 18px",
+                  border: "1px solid #dce5dc",
                   background: "#ffffff",
-                  color: "#245c32",
-                  fontWeight: "bold",
+                  borderRadius: "12px",
+                  padding: "11px 17px",
                   cursor: "pointer",
+                  color: "#496050",
+                  fontWeight: "bold",
                 }}
               >
-                Explore Crops →
+                {t("logout")}
               </button>
             </div>
-
-            <div
-              style={{
-                fontSize: "95px",
-                opacity: 0.18,
-                transform:
-                  "rotate(-10deg)",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              🌾
-            </div>
           </div>
+
+          {/* HERO BANNER & SHOWCASE CARDS (MATCHING REFERENCE DESIGN CONCEPT) */}
+          <HeroBanner role="buyer" />
+          <ShowcaseCards role="buyer" />
 
           {/* =================================================
               QUICK STATS
@@ -817,6 +738,12 @@ function BuyerDashboard() {
               </div>
             </div>
           </div>
+
+          {/* =================================================
+              FARMER AI FRESHNESS LEADERBOARD
+          ================================================= */}
+
+          <FarmerLeaderboard />
 
           {/* =================================================
               SECTION TITLE
@@ -1527,6 +1454,7 @@ function BuyerDashboard() {
           }
         `}
       </style>
+      <Footer />
     </div>
   );
 }

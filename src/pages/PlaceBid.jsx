@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Footer from "../components/Footer";
 
 function PlaceBid() {
   const [bidPrice, setBidPrice] = useState("");
@@ -1655,6 +1656,7 @@ function PlaceBid() {
         </div>
 
       </div>
+      <Footer />
     </div>
   );
 }

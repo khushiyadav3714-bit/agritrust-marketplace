@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import Footer from "../components/Footer";
+import { useLanguage } from "../context/LanguageContext";
 
 function Login() {
+  const { language, toggleLanguage, t } = useLanguage();
   const [role, setRole] = useState("farmer");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   // =====================================================
@@ -152,16 +153,24 @@ function Login() {
       style={{
         minHeight: "100vh",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "25px",
-        boxSizing: "border-box",
+        flexDirection: "column",
         background:
           "linear-gradient(135deg, #eef8f0 0%, #f8fbf8 50%, #e7f5ea 100%)",
         fontFamily:
           "Inter, Arial, Helvetica, sans-serif",
       }}
     >
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "40px 20px",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
 
       {/* =================================================
           MAIN LOGIN CONTAINER
@@ -866,7 +875,9 @@ function Login() {
           }
         `}
       </style>
+      </div>
 
+      <Footer />
     </div>
   );
 }

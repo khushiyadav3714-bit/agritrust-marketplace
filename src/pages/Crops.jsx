@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import Footer from "../components/Footer";
 
 function Crops() {
+  const { language, toggleLanguage, t } = useLanguage();
   const [image, setImage] = useState(null);
   const [quantity, setQuantity] = useState("");
   const [lastSprayDays, setLastSprayDays] = useState("");
+
 
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -327,17 +331,36 @@ function Crops() {
           HEADER
       ================================================= */}
 
-      <div className="crops-header">
+      <div className="crops-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "15px" }}>
 
-        <h1>
-          🍅 AI Tomato Analysis
-        </h1>
+        <div>
+          <h1>
+            🍅 {t("crop_listing_title")}
+          </h1>
 
-        <p>
-          Upload your tomato image and provide
-          the crop details to get an AI-based
-          quality and fair-price recommendation.
-        </p>
+          <p>
+            {t("crop_listing_desc")}
+          </p>
+        </div>
+
+        <button
+          onClick={toggleLanguage}
+          type="button"
+          style={{
+            padding: "10px 16px",
+            border: "1px solid #2e7d32",
+            borderRadius: "10px",
+            background: "#e8f5e9",
+            color: "#2e7d32",
+            cursor: "pointer",
+            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px"
+          }}
+        >
+          🌐 {language === "en" ? "ಕನ್ನಡ" : "English"}
+        </button>
 
       </div>
 
@@ -349,7 +372,7 @@ function Crops() {
       <div className="crop-card">
 
         <h2>
-          🍅 Tomato Details
+          🍅 {t("crop_listing_title")}
         </h2>
 
         <form onSubmit={handleSubmit}>
@@ -376,14 +399,14 @@ function Crops() {
           <div className="form-group">
 
             <label>
-              Quantity to Sell (kg)
+              {t("quantity_label")}
             </label>
 
             <input
               type="number"
               min="0.1"
               step="0.1"
-              placeholder="Enter quantity in kg"
+              placeholder={t("quantity_placeholder")}
               value={quantity}
               onChange={(e) =>
                 setQuantity(
@@ -401,13 +424,13 @@ function Crops() {
           <div className="form-group">
 
             <label>
-              Days Since Last Spray
+              {t("spray_label")}
             </label>
 
             <input
               type="number"
               min="0"
-              placeholder="Enter number of days"
+              placeholder={t("spray_placeholder")}
               value={lastSprayDays}
               onChange={(e) =>
                 setLastSprayDays(
@@ -425,7 +448,7 @@ function Crops() {
           <div className="form-group">
 
             <label>
-              Upload One Tomato Image
+              {t("upload_image_label")}
             </label>
 
             <input
@@ -475,8 +498,8 @@ function Crops() {
           >
 
             {loading
-              ? "🤖 Analysing & Creating Listing..."
-              : "🔍 Analyse Tomato & Create Listing"
+              ? `🤖 ${t("analyzing")}`
+              : `🔍 ${t("submit_crop")}`
             }
 
           </button>
@@ -922,6 +945,7 @@ function Crops() {
 
       )}
 
+      <Footer />
     </div>
   );
 }

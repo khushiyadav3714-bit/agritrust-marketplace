@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Footer from "../components/Footer";
 
 function Register() {
   const [role, setRole] = useState("farmer");
@@ -331,14 +332,22 @@ function Register() {
         background:
           "linear-gradient(135deg, #eaf6ec 0%, #f7fbf8 48%, #eef8f0 100%)",
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "30px 18px",
-        boxSizing: "border-box",
+        flexDirection: "column",
         fontFamily:
           "Arial, Helvetica, sans-serif",
       }}
     >
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "40px 18px",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
 
       {/* =================================================
           MAIN CARD
@@ -928,7 +937,9 @@ function Register() {
         </div>
 
       </div>
+      </div>
 
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import FarmerLeaderboard from "../components/FarmerLeaderboard";
+import Footer from "../components/Footer";
 
 function AvailableCrops() {
+  const { language, toggleLanguage, t } = useLanguage();
   const [farmer, setFarmer] = useState(null);
   const [buyer, setBuyer] = useState(null);
   const [listing, setListing] = useState(null);
@@ -889,6 +893,26 @@ function AvailableCrops() {
           </span>
 
           <button
+            onClick={toggleLanguage}
+            type="button"
+            style={{
+              padding: "8px 14px",
+              border: "1px solid #2e7d32",
+              borderRadius: "10px",
+              background: "#e8f5e9",
+              color: "#2e7d32",
+              cursor: "pointer",
+              fontWeight: "bold",
+              fontSize: "13px",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px"
+            }}
+          >
+            🌐 {language === "en" ? "ಕನ್ನಡ" : "English"}
+          </button>
+
+          <button
             style={
               styles.outlineButton
             }
@@ -897,7 +921,7 @@ function AvailableCrops() {
                 "/buyer-dashboard";
             }}
           >
-            Dashboard
+            ← {t("nav_dashboard")}
           </button>
 
         </div>
@@ -2249,27 +2273,7 @@ function AvailableCrops() {
 
       </div>
 
-      {/* =================================================
-          FOOTER
-      ================================================= */}
-
-      <div
-        style={
-          styles.footer
-        }
-      >
-
-        <strong>
-          🌱 AgriTrust
-        </strong>
-
-        <span>
-          Transparent • Farmer-Friendly •
-          AI-Assisted
-        </span>
-
-      </div>
-
+      <Footer />
     </div>
   );
 }

@@ -132,3 +132,26 @@ def health():
     return {
         "status": "healthy"
     }
+
+
+@app.get("/health/db")
+def db_health():
+    try:
+        if db is not None:
+            db.command("ping")
+            return {
+                "status": "healthy",
+                "database": "connected",
+                "db_name": getattr(db, "name", "unknown")
+            }
+        else:
+            return {
+                "status": "unhealthy",
+                "database": "not configured"
+            }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "database": "disconnected",
+            "error": str(e)
+        }

@@ -1,7 +1,14 @@
 import React from "react";
 import PriceTrendChart from "./PriceTrendChart";
+import { useLanguage } from "../context/LanguageContext";
+import Footer from "../components/Footer";
+import HeroBanner from "../components/HeroBanner";
+import ShowcaseCards from "../components/ShowcaseCards";
+import Navbar from "../components/Navbar";
 
 function FarmerDashboard() {
+  const { language, toggleLanguage, t } = useLanguage();
+
   return (
     <div
       style={{
@@ -61,7 +68,7 @@ function FarmerDashboard() {
                 color: "#2e7d32",
               }}
             >
-              AgriTrust
+              {t("app_title")}
             </h2>
 
             <small
@@ -69,35 +76,56 @@ function FarmerDashboard() {
                 color: "#777",
               }}
             >
-              Farmer Marketplace
+              {t("app_subtitle")}
             </small>
           </div>
 
         </div>
 
 
-        <button
-          onClick={() => {
-            localStorage.removeItem(
-              "agritrust_user"
-            );
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <button
+            onClick={toggleLanguage}
+            style={{
+              padding: "10px 16px",
+              border: "1px solid #2e7d32",
+              borderRadius: "10px",
+              background: "#e8f5e9",
+              color: "#2e7d32",
+              cursor: "pointer",
+              fontWeight: "bold",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px"
+            }}
+          >
+            🌐 {language === "en" ? "ಕನ್ನಡ" : "English"}
+          </button>
 
-            window.location.href =
-              "/login";
-          }}
-          style={{
-            padding: "10px 18px",
-            border: "1px solid #ddd",
-            borderRadius: "10px",
-            background: "#ffffff",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
-        >
-          Logout
-        </button>
+          <button
+            onClick={() => {
+              localStorage.removeItem(
+                "agritrust_user"
+              );
+
+              window.location.href =
+                "/login";
+            }}
+            style={{
+              padding: "10px 18px",
+              border: "1px solid #ddd",
+              borderRadius: "10px",
+              background: "#ffffff",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            {t("logout")}
+          </button>
+        </div>
 
       </header>
+
 
 
       {/* =====================================================
@@ -112,93 +140,9 @@ function FarmerDashboard() {
         }}
       >
 
-        {/* =================================================
-            WELCOME SECTION
-        ================================================= */}
-
-        <section
-          style={{
-            background:
-              "linear-gradient(135deg, #2e7d32, #43a047)",
-            borderRadius: "22px",
-            padding: "35px",
-            color: "#ffffff",
-            marginBottom: "30px",
-            boxShadow:
-              "0 8px 25px rgba(46,125,50,0.18)",
-          }}
-        >
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: "25px",
-            }}
-          >
-
-            <div>
-
-              <p
-                style={{
-                  margin: "0 0 8px",
-                  opacity: 0.9,
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  letterSpacing: "0.5px",
-                }}
-              >
-                FARMER DASHBOARD
-              </p>
-
-              <h1
-                style={{
-                  margin: 0,
-                  fontSize: "34px",
-                }}
-              >
-                Welcome, Farmer! 👋
-              </h1>
-
-              <p
-                style={{
-                  margin:
-                    "12px 0 0",
-                  maxWidth: "650px",
-                  lineHeight: 1.6,
-                  opacity: 0.95,
-                }}
-              >
-                Manage your crops, monitor
-                market prices and connect
-                directly with buyers through
-                the AgriTrust marketplace.
-              </p>
-
-            </div>
-
-
-            <div
-              style={{
-                width: "90px",
-                height: "90px",
-                borderRadius: "25px",
-                background:
-                  "rgba(255,255,255,0.16)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "50px",
-              }}
-            >
-              👨‍🌾
-            </div>
-
-          </div>
-
-        </section>
+        {/* HERO BANNER & SHOWCASE CARDS (INSPIRED BY USER DESIGN REFERENCE) */}
+        <HeroBanner role="farmer" />
+        <ShowcaseCards role="farmer" />
 
 
         {/* =================================================
@@ -487,7 +431,7 @@ function FarmerDashboard() {
             </div>
 
             <h2>
-              My Crops
+              {t("my_crops")}
             </h2>
 
             <p
@@ -497,10 +441,7 @@ function FarmerDashboard() {
                 minHeight: "50px",
               }}
             >
-              View your registered crops,
-              AI quality information,
-              buyer feedback and listing
-              status.
+              {t("my_crops_desc")}
             </p>
 
             <button
@@ -519,7 +460,7 @@ function FarmerDashboard() {
                 cursor: "pointer",
               }}
             >
-              View My Crops →
+              {t("view_my_crops")}
             </button>
 
           </div>
@@ -554,7 +495,7 @@ function FarmerDashboard() {
             </div>
 
             <h2>
-              Live Market Prices
+              {t("live_prices")}
             </h2>
 
             <p
@@ -564,9 +505,7 @@ function FarmerDashboard() {
                 minHeight: "50px",
               }}
             >
-              Check current tomato market
-              reference prices from
-              Bengaluru APMC.
+              {t("live_prices_desc")}
             </p>
 
             <button
@@ -585,7 +524,7 @@ function FarmerDashboard() {
                 cursor: "pointer",
               }}
             >
-              View Live Prices →
+              {t("view_live_prices")}
             </button>
 
           </div>
@@ -620,7 +559,7 @@ function FarmerDashboard() {
             </div>
 
             <h2>
-              Buyer Bids
+              {t("buyer_bids")}
             </h2>
 
             <p
@@ -630,9 +569,7 @@ function FarmerDashboard() {
                 minHeight: "50px",
               }}
             >
-              Review offers submitted by
-              buyers and choose the best
-              available bid.
+              {t("buyer_bids_desc")}
             </p>
 
             <button
@@ -651,7 +588,7 @@ function FarmerDashboard() {
                 cursor: "pointer",
               }}
             >
-              View Buyer Bids →
+              {t("view_buyer_bids")}
             </button>
 
           </div>
@@ -686,7 +623,7 @@ function FarmerDashboard() {
             </div>
 
             <h2>
-              AI Prediction
+              {t("ai_prediction")}
             </h2>
 
             <p
@@ -696,9 +633,7 @@ function FarmerDashboard() {
                 minHeight: "50px",
               }}
             >
-              Get AI-based crop quality
-              insights and intelligent
-              price recommendations.
+              {t("ai_prediction_desc")}
             </p>
 
             <button
@@ -717,7 +652,7 @@ function FarmerDashboard() {
                 cursor: "pointer",
               }}
             >
-              Open AI Analysis →
+              {t("open_ai_analysis")}
             </button>
 
           </div>
@@ -812,25 +747,9 @@ function FarmerDashboard() {
 
         </div>
 
-
-        {/* =================================================
-            FOOTER
-        ================================================= */}
-
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: "35px",
-            color: "#888",
-            fontSize: "13px",
-          }}
-        >
-          🌱 AgriTrust • Transparent
-          Agricultural Marketplace
-        </div>
-
       </main>
 
+      <Footer />
     </div>
   );
 }
